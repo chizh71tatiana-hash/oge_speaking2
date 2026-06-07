@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ОГЭ Speaking Trainer — варианты 11–20</title>
+<style>
+:root {
+  --bg1:#09111f; --bg2:#101a35; --card:#ffffff; --text:#182033; --muted:#6b7280;
+  --blue:#2f6df6; --violet:#8a5cf6; --cyan:#25c7d9; --green:#20b486; --orange:#ffb020;
+  --line:rgba(24,32,51,.12); --shadow:0 22px 60px rgba(3,10,30,.25); --radius:24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif;background:
+ radial-gradient(circle at 10% 10%, rgba(47,109,246,.35), transparent 28%),
+ radial-gradient(circle at 90% 0%, rgba(138,92,246,.35), transparent 30%),
+ linear-gradient(135deg,var(--bg1),var(--bg2));color:var(--text);}
+.hero{max-width:1180px;margin:0 auto;padding:44px 20px 24px;color:white}
+.hero-card{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.16);border-radius:32px;padding:34px;background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.05));backdrop-filter:blur(16px);box-shadow:var(--shadow)}
+.hero-card:before{content:"";position:absolute;right:-80px;top:-80px;width:260px;height:260px;background:linear-gradient(135deg,var(--cyan),var(--violet));border-radius:50%;filter:blur(5px);opacity:.55}
+.kicker{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.14);font-weight:700;font-size:14px}
+h1{font-size:clamp(34px,6vw,72px);line-height:.95;margin:20px 0 14px;letter-spacing:-.05em}
+.subtitle{max-width:760px;font-size:18px;line-height:1.55;color:rgba(255,255,255,.84);margin:0}
+.toolbar{max-width:1180px;margin:0 auto 22px;padding:0 20px;display:grid;grid-template-columns:1fr auto auto;gap:12px;position:sticky;top:0;z-index:10}
+.search,.select,.small-btn{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.92);border-radius:18px;padding:14px 16px;font-size:16px;box-shadow:0 12px 35px rgba(3,10,30,.18)}
+.search{width:100%;outline:none} .select{cursor:pointer} .small-btn{cursor:pointer;font-weight:800;color:#172033}
+.small-btn:hover,.select:hover{transform:translateY(-1px)}
+.grid{max-width:1180px;margin:0 auto;padding:0 20px 70px;display:grid;gap:22px}
+.variant{background:rgba(255,255,255,.96);border:1px solid rgba(255,255,255,.55);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;overflow:hidden}
+.variant-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:4px 4px 18px;border-bottom:1px solid var(--line)}
+.label{margin:0 0 6px;color:var(--blue);font-weight:900;text-transform:uppercase;letter-spacing:.1em;font-size:12px}
+h2{margin:0;font-size:30px;letter-spacing:-.03em} .chip{text-decoration:none;color:white;background:linear-gradient(135deg,var(--blue),var(--violet));border-radius:999px;padding:10px 14px;font-weight:900}
+.audio-box{display:grid;grid-template-columns:1fr minmax(260px,460px);gap:12px;align-items:center;margin:18px 0;padding:16px;border-radius:20px;background:linear-gradient(135deg,rgba(47,109,246,.10),rgba(37,199,217,.10));border:1px solid var(--line)}
+.audio-title{font-size:16px} audio{width:100%} .hint{grid-column:1/-1;margin:0;color:var(--muted);font-size:13px}
+.questions{display:grid;gap:14px}
+.question{border:1px solid var(--line);border-radius:20px;padding:16px;background:linear-gradient(180deg,#fff,#f8fbff);transition:.2s ease}
+.question.done{border-color:rgba(32,180,134,.45);background:linear-gradient(180deg,#f2fff9,#fff)}
+.q-top{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:start}
+.q-num{display:grid;place-items:center;width:38px;height:38px;border-radius:14px;background:#edf3ff;color:var(--blue);font-weight:900}
+h3{margin:6px 0 0;font-size:19px;line-height:1.35}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 0 54px}
+button{font-family:inherit} .timerBtn,.doneBtn,.answerBtn{border:0;border-radius:14px;padding:10px 13px;font-weight:800;cursor:pointer}
+.timerBtn{background:#fff2cf;color:#835500} .doneBtn{background:#e9fbf5;color:#087a55} .answerBtn{background:#eef3ff;color:#1746a2}
+.answer{display:none;margin:14px 0 0 54px;padding:16px 18px;border-left:4px solid var(--green);background:#f2fff9;border-radius:14px;color:#143226;line-height:1.6}
+.answer.open{display:block} .answer p{margin:0}
+.timer-pop{position:fixed;right:20px;bottom:20px;background:#101a35;color:white;border:1px solid rgba(255,255,255,.15);border-radius:24px;padding:18px 20px;box-shadow:var(--shadow);z-index:50;min-width:230px}
+.timer-number{font-size:44px;font-weight:950;letter-spacing:-.06em} .timer-note{color:rgba(255,255,255,.75)}
+.footer{max-width:1180px;margin:0 auto;padding:0 20px 36px;color:rgba(255,255,255,.65);font-size:14px}
+@media(max-width:760px){.toolbar{grid-template-columns:1fr}.audio-box{grid-template-columns:1fr}.actions,.answer{margin-left:0}.q-top{grid-template-columns:36px 1fr}h3{font-size:17px}.hero-card{padding:24px}}
+@media print{body{background:white}.hero,.toolbar,.audio-box,.actions,.footer{display:none}.grid{padding:0}.variant{box-shadow:none;break-inside:avoid}.answer{display:block}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-card">
+    <span class="kicker">🎙 ОГЭ English • Speaking practice</span>
+    <h1>Устная часть ОГЭ<br>варианты 11–20</h1>
+    <p class="subtitle">Тренажёр для 9 класса: слушай аудио варианта, отвечай сам, запускай таймер на 40 секунд и открывай готовый ответ только после попытки. В этом файле варианты варианты 11–20.</p>
+  </div>
+</header>
+<nav class="toolbar">
+  <input class="search" id="search" placeholder="Найти тему или вопрос: sport, school, Internet…" oninput="filterCards()" />
+  <select class="select" id="jump" onchange="jumpToVariant(this.value)">
+    <option value="">Перейти к варианту</option>
+    <option value="variant-11">Вариант 11: Household Chores</option><option value="variant-12">Вариант 12: Hometown</option><option value="variant-13">Вариант 13: School</option><option value="variant-14">Вариант 14: Environment</option><option value="variant-15">Вариант 15: Money Issues</option><option value="variant-16">Вариант 16: Pets</option><option value="variant-17">Вариант 17: The Internet</option><option value="variant-18">Вариант 18: Home</option><option value="variant-19">Вариант 19: Books</option><option value="variant-20">Вариант 20: Keeping Fit</option>
+  </select>
+  <button class="small-btn" onclick="collapseAll()">Скрыть ответы</button>
+</nav>
+<main class="grid" id="grid">
+    <section class="variant" id="variant-11" data-variant="11" data-title="household chores">
+      <div class="variant-head">
+        <div>
+          <p class="label">Вариант 11</p>
+          <h2>Household Chores</h2>
+        </div>
+        <a class="chip" href="#variant-11">#11</a>
+      </div>
+      <div class="audio-box">
+        <div class="audio-title">🎧 Аудио к варианту: <strong>11.mp3</strong></div>
+        <audio controls preload="none" src="11.mp3"></audio>
+        <p class="hint"><b></b> </p>
+      </div>
+      <div class="questions">
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">1</span>
+            <h3>What time do you usually come back from school?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I usually come back from school at about three or four o’clock. Sometimes I return later because I have extra classes. My school day is quite busy.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">2</span>
+            <h3>How much time does it take you to do your homework?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>It usually takes me about two or three hours to do my homework. Maths and physics can take a lot of time. If we have many tasks, I finish my homework in the evening.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">3</span>
+            <h3>What are your Sundays like?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>My Sundays are usually calm. I sleep longer, do my homework and spend time with my family. I also try to relax before a new school week.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">4</span>
+            <h3>What chores do you do at home to help your parents?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I help my parents with simple chores. I take out the rubbish, clean my room and sometimes wash the dishes. I think every teenager should help at home.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">5</span>
+            <h3>What chores would you like to delegate to a home robot?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I would like to delegate cleaning the floor and washing the dishes to a home robot. These chores are boring and take time. A robot could make everyday life easier.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">6</span>
+            <h3>What advice would you give to a teenager who hates cleaning his or her room?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I would advise him or her to clean the room little by little. It is easier to spend ten minutes every day than to clean everything at once. Also, a clean room helps you study better.</p></div>
+        </article></div>
+    </section>
+    <section class="variant" id="variant-12" data-variant="12" data-title="hometown">
+      <div class="variant-head">
+        <div>
+          <p class="label">Вариант 12</p>
+          <h2>Hometown</h2>
+        </div>
+        <a class="chip" href="#variant-12">#12</a>
+      </div>
+      <div class="audio-box">
+        <div class="audio-title">🎧 Аудио к варианту: <strong>12.mp3</strong></div>
+        <audio controls preload="none" src="12.mp3"></audio>
+        <p class="hint"><b></b></p>
+      </div>
+      <div class="questions">
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">1</span>
+            <h3>Do you live in the country or in the city?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I live in the city. My hometown is Kolpino, which is a district of Saint Petersburg. It is not as big as the city centre, but it has everything people need.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">2</span>
+            <h3>What is typical winter weather in your hometown?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>Typical winter weather in my hometown is cold and cloudy. It often snows or rains, and the streets can be slippery. Sometimes the weather is windy because we live near Saint Petersburg.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">3</span>
+            <h3>What place in your hometown do you like most of all?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I like the parks and quiet streets in Kolpino most of all. They are good places for walking with friends. I also like that Saint Petersburg is not very far away.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">4</span>
+            <h3>What environmental problems do people have in your hometown?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>People in my hometown have some environmental problems, such as air pollution and rubbish. There is also a lot of transport, so the air is not always clean. I think people should take better care of nature.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">5</span>
+            <h3>Would you like to stay in your hometown when you finish school? Why, or why not?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I am not sure yet. I may stay in Saint Petersburg because there are many good universities there. But in the future I may move to another city if I find a good job.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">6</span>
+            <h3>What would you do for your hometown if you were very rich?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>If I were very rich, I would build more sports grounds and modern study centres for teenagers. I would also improve parks and make the town cleaner. It would be great to create more interesting places for young people.</p></div>
+        </article></div>
+    </section>
+    <section class="variant" id="variant-13" data-variant="13" data-title="school">
+      <div class="variant-head">
+        <div>
+          <p class="label">Вариант 13</p>
+          <h2>School</h2>
+        </div>
+        <a class="chip" href="#variant-13">#13</a>
+      </div>
+      <div class="audio-box">
+        <div class="audio-title">🎧 Аудио к варианту: <strong>13.mp3</strong></div>
+        <audio controls preload="none" src="13.mp3"></audio>
+        <p class="hint"><b></b></p>
+      </div>
+      <div class="questions">
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">1</span>
+            <h3>What transport do you use to get to your school?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I usually get to school by bus or on foot. It depends on the weather and how much time I have. I live in Kolpino, so the way to school is not too difficult.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">2</span>
+            <h3>What does your school building look like?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>My school building is quite ordinary but comfortable. It has classrooms, a gym, a canteen and computer rooms. Some classrooms are modern and have interactive boards.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">3</span>
+            <h3>What sports facilities does your school offer to the students?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>My school offers a gym and a sports ground. Students can play football, basketball and volleyball. We also have PE lessons and sometimes sports competitions.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">4</span>
+            <h3>What foreign languages can the students learn at your school?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>Students at my school can learn English. Some students may also learn another language, for example German. English is the main foreign language for most of us.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">5</span>
+            <h3>What clothes do you have to wear to school?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I usually wear dark trousers, a shirt and a sweater or jacket. Our clothes should look neat and formal. I think it is normal for school.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">6</span>
+            <h3>What would you change in your school if you were the principal?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>If I were the principal, I would make the timetable a little less stressful. I would also add more modern equipment for physics and computer science. Besides, I would make more comfortable places for students to relax between lessons.</p></div>
+        </article></div>
+    </section>
+    <section class="variant" id="variant-14" data-variant="14" data-title="environment">
+      <div class="variant-head">
+        <div>
+          <p class="label">Вариант 14</p>
+          <h2>Environment</h2>
+        </div>
+        <a class="chip" href="#variant-14">#14</a>
+      </div>
+      <div class="audio-box">
+        <div class="audio-title">🎧 Аудио к варианту: <strong>14.mp3</strong></div>
+        <audio controls preload="none" src="14.mp3"></audio>
+        <p class="hint"><b></b> </p>
+      </div>
+      <div class="questions">
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">1</span>
+            <h3>What environmental problem do you think is the most serious for our planet?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I think climate change and pollution are the most serious environmental problems. They affect people, animals and nature. If we do not solve these problems, life on our planet will become worse.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">2</span>
+            <h3>Describe one environmental problem in your hometown.</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>One environmental problem in my hometown is rubbish in streets and parks. Some people do not throw litter into bins. It makes the town look dirty and harms nature.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">3</span>
+            <h3>Does your family sort the rubbish before throwing it away? Why, or why not?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>My family does not always sort rubbish, but we try to do it when it is possible. Unfortunately, there are not enough convenient recycling bins everywhere. I think sorting rubbish should be easier for people.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">4</span>
+            <h3>What can students in your school do to help the environment?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>Students can collect waste paper, save electricity and take part in clean-up days. They can also use less plastic. Even small actions can help the environment if many people do them.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">5</span>
+            <h3>Does a career as an ecologist attract you or not? Why?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>A career as an ecologist does not attract me very much. I am more interested in maths, physics and IT. But I understand that ecologists do very important work.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">6</span>
+            <h3>What would you recommend teenagers do to make their hometown a better place to live in?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I would recommend teenagers not to litter and to take part in clean-up activities. They can also plant trees and help make parks cleaner. It is important to respect the place where you live.</p></div>
+        </article></div>
+    </section>
+    <section class="variant" id="variant-15" data-variant="15" data-title="money issues">
+      <div class="variant-head">
+        <div>
+          <p class="label">Вариант 15</p>
+          <h2>Money Issues</h2>
+        </div>
+        <a class="chip" href="#variant-15">#15</a>
+      </div>
+      <div class="audio-box">
+        <div class="audio-title">🎧 Аудио к варианту: <strong>15.mp3</strong></div>
+        <audio controls preload="none" src="15.mp3"></audio>
+        <p class="hint"><b></b> </p>
+      </div>
+      <div class="questions">
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">1</span>
+            <h3>How much free time a day do you have on average?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>On average, I have about two or three hours of free time a day. I study at a physics and mathematics lyceum, so I have a lot of homework. On weekends I usually have more free time.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">2</span>
+            <h3>What do you enjoy doing in your free time?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I enjoy playing computer games, watching videos and walking with my friends. I also like listening to music. Sometimes I read or learn something about computers.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">3</span>
+            <h3>How do you get your pocket money?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I get my pocket money from my parents. They usually give me some money for snacks, transport or small things I need. Sometimes I save money for something more expensive.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">4</span>
+            <h3>What do you usually spend your pocket money on?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I usually spend my pocket money on snacks, transport and small things for school. Sometimes I buy something for my computer or phone. I try not to spend all my money at once.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">5</span>
+            <h3>Would you like to take a part-time job? Why?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>Yes, I would like to take a part-time job in the future. It would help me earn my own money and become more independent. But now school is more important for me.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">6</span>
+            <h3>What part-time job would you recommend to a teenager who wants to earn some extra money during the summer holidays?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I would recommend working as a courier, a shop assistant or a camp helper. These jobs can be suitable for teenagers during summer. But the job should be safe and not too difficult.</p></div>
+        </article></div>
+    </section>
+    <section class="variant" id="variant-16" data-variant="16" data-title="pets">
+      <div class="variant-head">
+        <div>
+          <p class="label">Вариант 16</p>
+          <h2>Pets</h2>
+        </div>
+        <a class="chip" href="#variant-16">#16</a>
+      </div>
+      <div class="audio-box">
+        <div class="audio-title">🎧 Аудио к варианту: <strong>16.mp3</strong></div>
+        <audio controls preload="none" src="16.mp3"></audio>
+        <p class="hint"><b></b> </p>
+      </div>
+      <div class="questions">
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">1</span>
+            <h3>Have you got a pet?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I have not got a pet now. I like animals, but a pet needs a lot of time and attention. Maybe I will have a cat or a dog in the future.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">2</span>
+            <h3>What pets are most popular in your region?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>Cats and dogs are the most popular pets in my region. Many people also keep parrots, hamsters or fish. I think cats are especially popular because they are good for flats.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">3</span>
+            <h3>What pets do you think would be dangerous to keep in a flat? Why?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I think exotic animals, big dogs or poisonous snakes can be dangerous to keep in a flat. They may need special care and a lot of space. Also, they can be dangerous for other people.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">4</span>
+            <h3>Why are people so attached to their pets?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>People are attached to their pets because pets become part of the family. They give people love and positive emotions. Pets can also help people feel less lonely.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">5</span>
+            <h3>Why do people sometimes abandon their pets?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>People sometimes abandon their pets because they are not ready for responsibility. A pet needs food, care and time every day. I think it is very cruel to leave animals alone.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">6</span>
+            <h3>What pet would you recommend to a person who has never had pets? Explain why.</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I would recommend a cat or a small hamster to a person who has never had pets. These animals are easier to take care of than some other pets. But a person should still be responsible and kind.</p></div>
+        </article></div>
+    </section>
+    <section class="variant" id="variant-17" data-variant="17" data-title="the internet">
+      <div class="variant-head">
+        <div>
+          <p class="label">Вариант 17</p>
+          <h2>The Internet</h2>
+        </div>
+        <a class="chip" href="#variant-17">#17</a>
+      </div>
+      <div class="audio-box">
+        <div class="audio-title">🎧 Аудио к варианту: <strong>17.mp3</strong></div>
+        <audio controls preload="none" src="17.mp3"></audio>
+        <p class="hint"><b></b> </p>
+      </div>
+      <div class="questions">
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">1</span>
+            <h3>What do you use the Internet for?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I use the Internet for studying, communication and entertainment. I watch videos, play games and look for information. I also use it to prepare for school lessons and exams.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">2</span>
+            <h3>How much time on average do you spend online a day?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>On average, I spend about three or four hours online a day. Some of this time is for studying, and some is for entertainment. I try not to spend too much time online.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">3</span>
+            <h3>There are many online courses available for free. What online courses would you like to take?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I would like to take online courses in programming, maths or physics. These subjects are connected with my interests and future plans. Free courses are a good way to learn something new.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">4</span>
+            <h3>How can the Internet motivate people to learn foreign languages?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>The Internet gives people many useful materials for learning languages. They can watch videos, listen to podcasts and talk to foreigners online. It makes learning more interesting and convenient.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">5</span>
+            <h3>Do you consider all the information on the Internet reliable or not? Why?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>No, I do not consider all the information on the Internet reliable. Anyone can post false or incorrect information online. That is why we should check facts on different websites.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">6</span>
+            <h3>How would you recommend teenagers avoid becoming addicted to the Internet?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I would recommend setting time limits and spending more time offline. Teenagers should do sport, meet friends and have hobbies. It is important to use the Internet wisely, not all day long.</p></div>
+        </article></div>
+    </section>
+    <section class="variant" id="variant-18" data-variant="18" data-title="home">
+      <div class="variant-head">
+        <div>
+          <p class="label">Вариант 18</p>
+          <h2>Home</h2>
+        </div>
+        <a class="chip" href="#variant-18">#18</a>
+      </div>
+      <div class="audio-box">
+        <div class="audio-title">🎧 Аудио к варианту: <strong>18.mp3</strong></div>
+        <audio controls preload="none" src="18.mp3"></audio>
+        <p class="hint"><b></b> </p>
+      </div>
+      <div class="questions">
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">1</span>
+            <h3>Do you live in a house or in a flat?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I live in a flat in Kolpino. It is a district of Saint Petersburg. Our flat is comfortable and close to the places I need.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">2</span>
+            <h3>Have you got a room of your own?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>Yes, I have a room of my own. I do my homework there and relax after school. I also keep my books, computer and personal things there.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">3</span>
+            <h3>What do you like to do when you have to stay at home?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>When I have to stay at home, I usually play computer games, watch videos or do homework. I also like listening to music. Sometimes I read or learn something useful online.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">4</span>
+            <h3>How do you help your parents about the house?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I help my parents by cleaning my room, taking out the rubbish and sometimes washing the dishes. I can also go to the shop if they ask me. I think helping at home is important.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">5</span>
+            <h3>What do you like about the area you live in?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I like that my area is quiet and comfortable. There are shops, schools and places for walking nearby. Also, it is possible to get to Saint Petersburg if I need to.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">6</span>
+            <h3>Where would you like to live — in the city or in the country? Why?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I would like to live in the city. The city has more schools, universities, jobs and interesting places. But I also like visiting the country during holidays because it is quiet there.</p></div>
+        </article></div>
+    </section>
+    <section class="variant" id="variant-19" data-variant="19" data-title="books">
+      <div class="variant-head">
+        <div>
+          <p class="label">Вариант 19</p>
+          <h2>Books</h2>
+        </div>
+        <a class="chip" href="#variant-19">#19</a>
+      </div>
+      <div class="audio-box">
+        <div class="audio-title">🎧 Аудио к варианту: <strong>19.mp3</strong></div>
+        <audio controls preload="none" src="19.mp3"></audio>
+        <p class="hint"><b></b> </p>
+      </div>
+      <div class="questions">
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">1</span>
+            <h3>What books do you prefer to read?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I prefer to read adventure books, science fiction and books about technology. I like stories with an interesting plot. I also sometimes read books that are useful for school.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">2</span>
+            <h3>Who is your favourite writer?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>My favourite writer is Jules Verne. I like his adventure and science fiction stories. His books are interesting and connected with travelling, inventions and discoveries.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">3</span>
+            <h3>How often do you borrow books from the library?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I do not borrow books from the library very often. I usually read books online or use books that I have at home. But sometimes I go to the library for school tasks.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">4</span>
+            <h3>Why do teenagers use libraries less nowadays than they used to?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>Teenagers use libraries less because they can find a lot of information on the Internet. Many books are available online now. Also, teenagers often prefer videos and social networks.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">5</span>
+            <h3>Do you prefer e-books or printed books? Why?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I prefer e-books because they are convenient. I can read them on my phone or tablet anywhere. But printed books are also nice because they are better for the eyes.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">6</span>
+            <h3>What book would you recommend your friends to read on holiday?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I would recommend my friends to read “The Mysterious Island” by Jules Verne. It is an exciting adventure story. I think it is a good book for holidays because it is interesting and not boring.</p></div>
+        </article></div>
+    </section>
+    <section class="variant" id="variant-20" data-variant="20" data-title="keeping fit">
+      <div class="variant-head">
+        <div>
+          <p class="label">Вариант 20</p>
+          <h2>Keeping Fit</h2>
+        </div>
+        <a class="chip" href="#variant-20">#20</a>
+      </div>
+      <div class="audio-box">
+        <div class="audio-title">🎧 Аудио к варианту: <strong>20.mp3</strong></div>
+        <audio controls preload="none" src="20.mp3"></audio>
+        <p class="hint"> <b></b> </p>
+      </div>
+      <div class="questions">
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">1</span>
+            <h3>How many classes do you have on an average weekday?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>On an average weekday I have six or seven classes. I study at a physics and mathematics lyceum, so our timetable is quite busy. Sometimes we also have extra lessons.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">2</span>
+            <h3>Do you do sports activities on weekdays? What sports do you do?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>Yes, I sometimes do sports activities on weekdays. I have PE lessons at school and sometimes play football or basketball with my friends. I also try to walk every day.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">3</span>
+            <h3>What is your favourite pastime?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>My favourite pastime is playing computer games and watching videos. I also like walking with my friends. Sometimes I learn something about computers or solve maths problems.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">4</span>
+            <h3>How much time do you spend on your homework?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I usually spend about two or three hours on my homework. Maths and physics tasks can take a lot of time. Before tests I may spend even more time studying.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">5</span>
+            <h3>What would you like to change in your daily routine?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I would like to have more free time and go to bed earlier. Sometimes I feel tired because I have a lot of homework. I think a better routine would help me study more effectively.</p></div>
+        </article>
+        <article class="question" data-done="false">
+          <div class="q-top">
+            <span class="q-num">6</span>
+            <h3>What would you recommend teenagers do to spend their time effectively?</h3>
+          </div>
+          <div class="actions">
+            <button class="timerBtn" type="button" onclick="startTimer(this)">⏱ 40 секунд</button>
+            <button class="doneBtn" type="button" onclick="toggleDone(this)">✓ Отметить</button>
+            <button class="answerBtn" type="button" onclick="toggleAnswer(this)">Показать ответ</button>
+          </div>
+          <div class="answer"><p>I would recommend teenagers to make a simple plan for the day. They should do homework first and then relax. It is also important to spend time outdoors, do sport and sleep enough.</p></div>
+        </article></div>
+    </section></main>
+<div class="footer">Файлы аудио должны лежать рядом с HTML и называться 11.mp3, 12.mp3 … 20.mp3. Если аудио не проигрывается, проверьте название файла и папку.</div>
+<div id="timer" class="timer-pop" style="display:none"><div class="timer-number" id="timerNumber">40</div><div class="timer-note" id="timerNote">Время на ответ</div></div>
+<script>
+let timerInterval = null;
+function toggleAnswer(btn) {
+  const ans = btn.closest('.question').querySelector('.answer');
+  ans.classList.toggle('open');
+  btn.textContent = ans.classList.contains('open') ? 'Скрыть ответ' : 'Показать ответ';
+}
+function toggleDone(btn) {
+  const q = btn.closest('.question');
+  q.classList.toggle('done');
+  btn.textContent = q.classList.contains('done') ? '✓ Готово' : '✓ Отметить';
+}
+function collapseAll() {
+  document.querySelectorAll('.answer').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.answerBtn').forEach(b => b.textContent = 'Показать ответ');
+}
+function jumpToVariant(id) { if(id) document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'}); }
+function filterCards() {
+  const val = document.getElementById('search').value.trim().toLowerCase();
+  document.querySelectorAll('.variant').forEach(card => {
+    const text = card.innerText.toLowerCase();
+    card.style.display = text.includes(val) ? '' : 'none';
+  });
+}
+function startTimer(btn) {
+  clearInterval(timerInterval);
+  let left = 40;
+  const box = document.getElementById('timer');
+  const num = document.getElementById('timerNumber');
+  const note = document.getElementById('timerNote');
+  box.style.display = 'block'; num.textContent = left; note.textContent = 'Время на ответ';
+  timerInterval = setInterval(() => {
+    left--; num.textContent = left;
+    if(left <= 0) { clearInterval(timerInterval); note.textContent = 'Время вышло. Открой ответ и сравни.'; }
+  }, 1000);
+}
+</script>
+</body>
+</html>
